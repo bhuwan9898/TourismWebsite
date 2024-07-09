@@ -1,0 +1,769 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta country_name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Country</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  />
+  <link rel="stylesheet" href="/cities.css">
+  <link rel="stylesheet" href="/places.css">
+</head>
+<body>
+  <div class="makeItFixed ">
+    <nav class="navbar nav-pills justify-content-around bg-light ">
+      <a class=" navbar-brand fs-2 fw-semibold " href="#">Countries <span id="countrycountry_name"></span></a>
+      <form class="d-flex " style = "width: 400px;" role="search">
+        <select class="form-control me-1 " id="countries">
+          <option value="">Select A Country</option>
+        </select>     
+        <button class="btn btn-outline-dark" type="submit" id = "search-country">
+            <i class="bi bi-search"></i> 
+        </button>
+      </form>
+          <div class="auth-container d-flex gap-4 align-items-center justify-content-center w-20"></div>
+    </nav> 
+</div> 
+  <div class="d-flex justify-content-center">
+    <div class="container text-cente m-5">
+      <div class = "container text-end m-3"> 
+        <div class="mt-4">
+          <div class="row">
+            <div class="col">
+              <a data-bs-toggle="modal" data-bs-target="#add_modal" class="btn btn-dark btn-add" id="btn-add">
+                <i class="bi bi-plus-circle"></i>
+              </a>
+            </div>
+          </div>
+          <div class="row mt-2">
+          </div>
+        </div>
+           
+      <div
+        id="country-container"
+        class="row row-cols-1 row-cols-sm-2 row-cols-lg-3"
+      >
+    </div>
+
+      <!-- PAGINATION -------------------------------------------------------------------->
+      <div id="actions" class="d-flex justify-content-center my-4"></div>
+    </div>
+     <!---Contacts-->
+    <section class = "contacts" style = "height: 50px;position:relative;bottom: 20; width: 100%;justify-content: center; align-items: center;">
+      <ul class= "ul">
+        <li class ="li">
+          <a class = "a" href="#">
+            <i class="fab fa-facebook-f icon"></i> </a>
+        </li>
+        <li class = "li">
+          <a  class = "a" href="#">
+            <i class="fab fa-twitter icon"></i></a>
+        </li>
+        <li class = "li" >
+          <a class = "a" href="#"><i class="fab fa-linkedin-in icon"></i></a></li>
+        <li class = "li">
+          <a class = "a" href="#"><i class="fab fa-google-plus-g icon"></i></a></li>
+      </ul>
+    </section>
+    <button id = "scroll-to-top-button" style = "display: block;">
+      <img height = "50" width = "50" src = "https://cdn3.iconfinder.com/data/icons/common-4/24/ui-22-1024.png">
+    </button>
+    
+
+    <!-- Login --------------------------------------------------------------->
+  <div class="modal fade" id="login_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered" style = "max-width: 400px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5 " id="staticBackdropLabel" style = "position: relative; left: 45%;">
+            <b>Login</b>
+          </h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="row g-3">
+            <div class="col-12">
+              <input type="email" class="form-control" id="loginEmail" required placeholder="Email">
+            </div>
+            <div class="col-12 ">
+              <input type="password" class="form-control" id="loginPassword" required placeholder="Password">
+            </div>
+            
+            <div class="col-12 text-center">
+              <button class="btn btn-secondary login-submit-btn" type="submit" >Submit</button>
+              <p>Don't have an account yet?</p>
+              <button type="button" class="btn btn-secondary signup-btn" id="signup-btn" data-bs-dismiss="modal"> Sign up</button>
+            </div>
+            <div class="loginError"></div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<!-- Signup--------------------------------------------------------------->
+<div class="modal fade" id="signup_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered" style = "max-width: 400px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5 " id="staticBackdropLabel" style = "position: relative; left: 45%;">
+          <b>Signup</b>
+        </h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3">
+          <div class="col-12">
+            <input type="text" class="form-control" id="signupUsername" required placeholder="Username">
+          </div>
+          <div class="col-12">
+            <input type="email" class="form-control" id="signupEmail" required placeholder="Email">
+          </div>
+          <div class="col-12 ">
+            <input type="password" class="form-control" id="signupPassword" required placeholder="Password">
+          </div>
+          
+          <div class="col-12 text-center">
+            <button class="btn btn-secondary login-submit-btn" type="submit" >Submit</button>
+            <p>Already have an account?</p>
+            <button type="button" class="btn btn-secondary login-btn" id="login-btn" data-bs-dismiss="modal">Login</button>
+          </div>
+          <div class="loginError"></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+    <!--UPDATE MODAL ------------------------------------------------------->
+    <div
+      class="modal fade"
+      id="update_modal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Update Country
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="card-body d-flex flex-column">
+              <form>
+                <div class="mb-3">
+                  <label for="inputcountry" class="form-label d-flex">Country Name</label>
+                  <input type="text" class="form-control" id="inputcountry"/>
+                </div>
+
+                <div class="mb-3">
+                  <label for="inputRating" class="form-label d-flex">Ratings</label>
+                  <input type="text" class="form-control" id="inputRating" />
+                </div>
+                <div class="mb-3">
+                  <label for="inputDescription" class="form-label d-flex"
+                    >Short Introduction</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="inputDescription"
+                    rows="3"
+                  ></textarea>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="edit-submit" class="btn btn-dark">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Add Modal-->
+    <div
+    class="modal fade"
+    id="add_modal"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+    >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">
+            Add Your Favorite Country besides this listed-Country
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body d-flex flex-column">
+            <form>
+              <div class="mb-3">
+                  <label for="inputImage" class="form-label d-flex">Country Image URL</label>
+                  <input type="text" class="form-control" id="inputImageAdd" />
+                </div>
+              <div class="mb-3">
+                <label for="inputcountry" class="form-label d-flex">Country Name</label>
+                <input type="text" class="form-control" id="inputcountryAdd"/>
+              </div>
+              <div class="mb-3">
+                <label for="inputRating" class="form-label d-flex">Ratings</label>
+                <input type="text" class="form-control" id="inputRatingAdd" />
+              </div>
+              <div class="mb-3">
+                <label for="inputDescription" class="form-label d-flex"
+                  >Short Introduction</label
+                >
+                <textarea
+                  class="form-control"
+                  id="inputDescriptionAdd"
+                  rows="3"
+                ></textarea>
+              </div>
+            </form>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="add-submit" class="btn btn-success">
+            Add Country
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://kit.fontawesome.com/118e30abce.js" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+  
+    var offset = 0;
+    var rpp = 9;
+    var pages = 0;
+    let editingCountryId = null;
+    let addingCountryId = null;
+
+    let users = []
+    let Countries = []
+
+    const scrollToTopButton = document.getElementById('scroll-to-top-button');
+
+    $(document).ready(function() {
+     
+    });
+
+    axios
+    .get('http://localhost:8000/v1/countries', {})
+    .then(function(res){
+        Countries = res.data
+        console.log(Countries)
+        let selectElement = $('#countries');
+        let options = '';
+        Countries.forEach(country => {
+            options += `<option value="${country.country}">${country.country}</option>`;
+        });
+        selectElement.append(options); 
+        displayCards(Countries);
+        displayPageBasedPagination(Countries);
+      }).catch(function(err){
+        console.log(err)
+      })
+
+    axios
+      .get('http://localhost:8000/v1/user/all', {})
+      .then(function (res) {
+        users = res.data;
+        console.log(users)
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+
+
+    function displayPageBasedPagination(country) {
+        rpp = 9;
+        pages = Math.ceil(country.length / rpp);
+        document.querySelector("#actions").innerHTML = "";
+        for (let i = 0; i < pages; i++) {
+          let loadMoreButton = document.createElement("button");
+          loadMoreButton.setAttribute("data-page", i + 1);
+          loadMoreButton.classList.add("btn");
+          loadMoreButton.classList.add("page-btn");
+          if(i * rpp === offset) {
+            loadMoreButton.classList.add("btn-dark");
+            loadMoreButton.classList.add("disabled");
+            }
+          else {
+            loadMoreButton.classList.add("btn-outline-dark");
+          }
+          loadMoreButton.classList.add("m-1");
+          loadMoreButton.innerText = i + 1;
+          loadMoreButton.addEventListener("click", function (e) {
+          let buttons = document.querySelectorAll(".page-btn");
+          for (let i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove("disabled");
+            buttons[i].classList.remove("btn-dark");
+            buttons[i].classList.add("btn-outline-dark");
+            }
+            offset = i * rpp;
+            e.target.classList.remove("btn-outline-dark");
+            e.target.classList.add("btn-dark");
+            e.target.classList.add("disabled");
+            document.getElementById("country-container").innerHTML = "";
+            displayCards(country);
+          });
+          document.querySelector("#actions").append(loadMoreButton);
+        }
+      }
+
+      function generateCard(Country) {
+           const cardHTML = `
+            <div class="col cards my-2" ids=${Country._id}>
+            <span class="card h-100">
+                <div class="position-relative">
+                <div>
+                    <img id="avatar" src="${Country.avatar}" class="card-img-top" alt="beagle" style = "box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);"/>
+                    <div class = "favorite-btn" id ="favorite-btn">
+                    <a id="favorite-btn">
+                    <i class="bi bi-heart-fill"></i>
+                    </a>
+                </div>
+                    </div>
+                </div>
+            <div class="card-body d-flex flex-column" style="text-align: left;">
+                <div class="d-flex justify-content-between">
+                <div class="d-flex"> <h5  class="card-title fw-bold " style="font-size: 24px;">${Country.country}</h5></div>
+                <div class = " generate-hidden">
+                    <i class="fa-solid fa-star"></i>${Country.ratings}
+                </div>
+                <div class="hidden-section">
+                        <div class="card-body">
+                        <h5 class="card-title"> ${Country.ratings} out of 5</h5>
+                        <p>50 global ratings</p>
+                        </div>
+                        <div class="card-body">
+                            <a href = "#" class = "review">Review</a>
+                            <i class="bi bi-arrow-up-right-circle"></i>
+                        </div>
+                </div>       
+                </div>
+                <ul class="list-unstyled">
+                <li class = "card-text">${Country.message}</li>
+                </ul>
+            </div>
+            <div class="d-flex justify-content-center gap-2 m-3">
+                  <a>
+                    <button class="learn-more">
+                      <span class="circle" aria-hidden="true">
+                        <span class="icon arrow"></span>
+                      </span>
+                      <a class="button-text" href="/countries/${Country._id}/cities" >Explore</a>
+                    </button>
+                  </a>
+                <a class="btn btn-dark btn-edit d-flex align-items-center" id="btn-edit">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+                <a class="btn btn-dark btn-delete d-flex align-items-center" id='btn-delete'>
+                  <i class="bi bi-trash3-fill"></i>
+                </a>
+            </div>
+            <div class="error"></div>
+            </span>
+        </div>`;
+        return cardHTML;
+        }
+
+      function displayCards(Countries) {
+        for (let i = offset; i < Math.min(offset + rpp, Countries.length); i++) {
+          document.getElementById("country-container").innerHTML += generateCard(
+            Countries[i]
+          );
+        }
+      }
+
+      $(document).ready(function(){
+          document.addEventListener('DOMContentLoaded', function () {
+          var exploreButtons = document.querySelectorAll('.button-text');
+          exploreButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+              var countryId = this.getAttribute('data-country-id');
+              redirectToCities(countryId);
+            });
+          });
+      });
+
+      function redirectToCities(countryId) {
+        window.location.href = `/countries/${countryId}/cities`;
+      }
+
+      function populateUpdateModal(Country) {
+        console.log(Country)
+        document.getElementById("inputcountry").value = Country.country || "";
+        document.getElementById("inputRating").value = Country.ratings || "";
+        document.getElementById("inputDescription").value = Country.message || "";
+
+      }
+        
+      function getCountryById(id) {
+        return Countries.find((Country) => Country._id === id);
+      }
+
+      //done
+      $(document).ready(function() {
+        checkUserInLocalStorage();
+        $(document).on('click', '#logoutBtn', function() {
+            logoutUser()
+        });
+
+        $('#login_modal form').submit(function(e){
+          e.preventDefault();
+          const email = $('#loginEmail').val();
+          const password = $('#loginPassword').val();
+          loginUser(email, password)
+        })
+
+        $('#signup_modal form').submit(function(e){
+          e.preventDefault();
+          const username = $('#signupUsername').val()
+          const email = $('#signupEmail').val();
+          const password = $('#signupPassword').val();
+          signupUser(username, email, password);
+        })
+
+        $(document).on("click", "#login-btn", function () {
+          $("#signup_modal").modal("hide");
+          $("#login_modal").modal("show");
+        });
+
+        $(document).on("click", "#signup-btn", function () {
+            $("#signup_modal").modal("show");
+            $("#login_modal").modal("hide");
+        });
+
+        $(document).on("click", "#favorite-btn", function () {
+            $("#login_modal").modal("show");
+        });
+        //handle the hidden card
+        $(document).on('mouseenter', '.generate-hidden', function() {
+            $(this).siblings('.hidden-section').css('display', 'block');
+        });
+
+        $(document).on('mouseleave', '.generate-hidden', function() {
+            $(this).siblings('.hidden-section').css('display', 'none');
+        });
+
+        $(document).on('mouseenter', '.hidden-section', function() {
+            $(this).css('display', 'block');
+        });
+
+        $(document).on('mouseleave', '.hidden-section', function() {
+            $(this).css('display', 'none');
+        });
+
+      });
+
+      //done
+      function loginUser(email, password){
+        axios.post("http://localhost:8000/v1/user/login", {email: email, password: password},  {headers: { "Content-Type": "application/json" }}).then((res)=> {
+            const {accessToken, name} = res.data
+            localStorage.setItem('user', JSON.stringify({name, accessToken}))
+            $("#login_modal").modal("hide");
+            checkUserInLocalStorage();
+        }).catch((err)=> {
+            console.log(err)
+            $(".loginError").text("Invalid email or password.");
+
+        })
+      }
+
+      //done
+      function signupUser(username, email, password){
+        console.log(username)
+        console.log(email)
+        console.log(password)
+        axios.post("http://localhost:8000/v1/user/", {
+            name: username, email: email, password: password,
+        }).then((res)=> {
+            const {name, accessToken} = res.data;
+            localStorage.setItem('user', JSON.stringify({name, accessToken}))
+            $("#signup_modal").modal("hide");
+            checkUserInLocalStorage();
+        }).catch((err)=> {
+            console.log(err)
+            $(".signupError").text("Error during registration. Try again.");
+
+        })
+      }
+
+      //done
+      function logoutUser(){
+        console.log('hi')
+        const accessToken =JSON.parse(localStorage.getItem('user')).accessToken
+        axios.post("http://localhost:8000/v1/user/logout",{}, {
+            headers: {
+            token: `Bearer ${accessToken}`, 
+            },} 
+        ).then((res)=> {
+            localStorage.removeItem('user')
+            checkUserInLocalStorage();
+        }).catch((err)=> {
+            console.log(err)
+        })
+      }
+
+      function checkUserInLocalStorage(){
+        const user = localStorage.getItem('user')
+        const authContainer = $('.auth-container')
+        if(user){
+          $('#btn-edit').show()
+          $('.btn-delete').show()
+          $('.btn-add').show()
+          const username = JSON.parse(user).name;
+          authContainer.html(`
+            <div>Hi, ${username}</div>
+            <button class = "btn btn-dark"id="logoutBtn">Logout</button>
+          `)
+        }else{
+          $('#btn-add').hide()
+          $('.btn-edit').hide()
+          $('.btn-delete').hide()
+          authContainer.html(`
+            <button class ="btn btn-dark" data-bs-toggle="modal" data-bs-target="#login_modal" id="loginBtn">Login</button>
+            <button class = "btn btn-dark" data-bs-toggle="modal" data-bs-target="#signup_modal" id="signupBtn">Sign Up</button>
+          `)
+        }
+      }
+
+      //done
+      function deleteCountry(countryId){
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user || !user.accessToken) {
+            console.log("User not authenticated");
+            return;
+        }
+        const accessToken = user.accessToken
+        axios.delete(`http://localhost:8000/v1/countries/${countryId}`,  {
+            headers: {
+                token: `Bearer ${accessToken}`, 
+            },
+        }).then((res)=> {
+            console.log(res.data);
+            axios.get('http://localhost:8000/v1/countries', {
+                headers: {
+                    token: `Bearer ${accessToken}`
+                }
+            }).then((response)=> {
+                Countries = response.data;
+                $("#country-container").empty();
+                displayCards(Countries); 
+                displayPageBasedPagination(Countries);
+            })
+        }).catch((err) => {
+            const cardWithError = $(`#country-container .cards[ids="${countryId}"] .error`);
+            console.log(cardWithError)
+            cardWithError.text("You are not authorized to delete this country.");
+            cardWithError.css("color", "red");
+          });
+      }
+
+      function createCountry(countryData){
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (!user || !user.accessToken) {
+            console.log("User not authenticated");
+            return;
+        }
+        const accessToken = user.accessToken
+        console.log(accessToken)
+
+        axios.post("http://localhost:8000/v1/countries", countryData, {
+        headers: {
+            token: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+        },
+        }).then((res)=> {
+            console.log('country created: ', res.data)
+            $("#add_modal").modal("hide");
+            axios.get('http://localhost:8000/v1/countries', {
+                headers: {
+                    token: `Bearer ${accessToken}`
+                }
+            }).then((response)=> {
+                Countries = response.data;
+                $("#country-container").empty();
+                displayCards(Countries); 
+                displayPageBasedPagination(Countries);
+            })
+        })
+      }
+
+      function updateCountry(countryId, updatedData){
+        const user = JSON.parse(localStorage.getItem('user'))
+        if(!user || !user.accessToken){
+            console.log('user not authenticated')
+        }
+        const accessToken = user.accessToken
+        axios.put(`http://localhost:8000/v1/countries/${countryId}`, updatedData, {
+            headers: {
+                token: `Bearer ${accessToken}`,
+                "Content-Type": "application/json",
+            },
+        }).then((res)=> {
+            console.log('country updated: ', res.data)
+            $("#update_modal").modal("hide");
+            axios.get('http://localhost:8000/v1/countries', {
+                headers: {
+                    token: `Bearer ${accessToken}`
+                }
+            }).then((response)=> {
+                Countries = response.data;
+                $("#country-container").empty();
+                displayCards(Countries); 
+            })
+           
+        }).catch((err) => {
+            const cardWithError = $(`#country-container .cards[ids="${countryId}"] .error`);
+            console.log(cardWithError)
+            cardWithError.text("You are not authorized to update this country.");
+            cardWithError.css("color", "red");
+          });
+      }
+    
+        $(() => {
+            //Handle the search button
+            document.getElementById("search-country").addEventListener("click", function(event) {  
+              event.preventDefault();
+              var countryDisplay = [];
+              var selectedCountry = document.getElementById("countries").value;
+              console.log(selectedCountry);
+              if (selectedCountry === ""){
+                alert("Please select a country.")
+              }
+              for(let i = 0; i < Countries.length; i++) {
+                  if (Countries[i].country === selectedCountry) {
+                      countryDisplay.push(Countries[i]);
+                      break; // Stop searching after finding the first match
+                  }
+              }
+              console.log(countryDisplay);
+              document.getElementById("country-container").innerHTML = "";
+              displayCards(countryDisplay);
+              displayPageBasedPagination(countryDisplay); 
+        });
+        //DELETE----DONE
+          $(document).on("click", ".btn-delete", function () {
+            const user = localStorage.getItem('user')
+            if(!user){
+              console.log('hi')
+               $("#login_modal").modal("show");
+            }else{
+              let countryId = $(this).closest(".cards").attr("ids");
+              console.log( $(this).closest(".cards"))
+              if (countryId) {
+                deleteCountry(countryId)
+              
+              }
+            }
+          });
+
+          //POPULATE UPDATE - DONE
+          $(document).on("click", "#btn-edit", function () {
+            const user = localStorage.getItem('user')
+            if(!user){
+               console.log('hi')
+               
+               $("#login_modal").modal("show");
+                $("#update_modal").modal("hide");
+            }else{
+              editingCountryId = $(this).closest(".cards").attr("ids");
+              editingCountry = getCountryById(editingCountryId);
+              populateUpdateModal(editingCountry);
+               $("#update_modal").modal("show");
+            }
+          });
+
+          //UPDATE--------DONE
+          $(document).on("click", "#edit-submit", function () {
+            console.log(editingCountryId)
+            const editingCountry = getCountryById(editingCountryId);
+            var updatedCountry = {
+              avatar: editingCountry.avatar,
+              country: $("#inputcountry").val() || editingCountry.country,
+              ratings: $("#inputRating").val() || editingCountry.ratings,
+              message: $("#inputDescription").val() || editingCountry.message,
+            };
+           updateCountry(editingCountryId, updatedCountry)
+          });
+
+          //CREATE COUNTRY------DONE
+          $(document).on("click", "#add-submit", function () {
+            var countryData = {
+              avatar: $("#inputImageAdd").val(),
+              country: $("#inputcountryAdd").val(),
+              ratings: $("#inputRatingAdd").val(),
+              message: $("#inputDescriptionAdd").val()                 
+            };
+            createCountry(countryData)
+            
+              });
+            });
+          });
+        //handle the go to top button
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopButton.style.display = 'block';
+            } else {
+                scrollToTopButton.style.display = 'none';
+            }
+        });
+
+        // Scroll the page to the top when the button is clicked
+        scrollToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+  </body>
+</html>
